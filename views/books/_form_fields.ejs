@@ -3,11 +3,11 @@
   <input type="text" name="title" value="<%= book.title %>">
   <label>Author</label>
   <select name="author">
-    <%authors.forEach(authors => { %>
-      <% if(authors.id === book.authors) { %>
-        <option selected label="<%= authors.name %>" value="<%= authors.id %>">
+    <%authors.forEach(author => { %>
+      <% if(author.id === book.author) { %>
+        <option selected label="<%= author.name %>" value="<%= author.id %>">
       <% } else { %>
-        <option  label="<%= authors.name %>" value="<%= authors.id %>">
+        <option  label="<%= author.name %>" value="<%= author.id %>">
       <% } %>
     <%})%>
   </select>
@@ -28,5 +28,5 @@
 </div>
 <div>
   <label> Description </label>
-  <textarea name="description" id="" cols="30" rows="10"> <%= book.description %></textarea>
+  <textarea name="descriptions" id="" cols="30" rows="10"> <%= book.descriptions %></textarea>
 </div>
