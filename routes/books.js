@@ -19,14 +19,37 @@ const upload = multer({
 
 // All Books Route
 router.get('/', async (req, res) => {
+  let query = Book.find(); //1 Kikérjük a book összes elemét
+
+  console.log(req.query.title, req.query.publishedBefore, req.query.publishedAfter)
+
+  if (req.query.title != null && req.query.title != '') {
+
+    query = query.regex('title', new RegExp(req.query.title,)) // amelynek belepasszoljuk 
+
+  }
+
+  if (req.query.publishedBefore != null && req.query.publishedBefore != '') {
+
+    query = query.lte('publishDate', new RegExp(req.query.publishedBefore,)) 
+
+  }
+
+  if (req.query.publishedAfter != null && req.query.publishedAfter != '') {
+
+    query = query.gte('publishDate', new RegExp(req.query.publishedAfter,)) 
+
+  }
+
+
   try {
-    const books = await Book.find({});
+    const books = await query.exec();
     res.render('books/index', {
       books: books,
       searchOptions: req.query
     })
   } catch (error) {
-    res.redirect('/')
+    console.log(error);
   }
 })
 

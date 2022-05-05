@@ -1,1 +1,9 @@
-Middle
+<div>
+  <% books.forEach(book => {%>
+    <div>
+      <h1><%= book.title %></h1>
+      <img height="150" width="100" src="<%= book.coverImagePath %> " alt="">
+      <p> <%= book.descriptions %></p>
+    </div>
+  <%})%>
+</div>
